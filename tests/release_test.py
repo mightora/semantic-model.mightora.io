@@ -9,9 +9,17 @@ assert '<script src=' not in html
 assert '<link rel="stylesheet" href=' not in html
 assert 'MapperCore' in html
 assert 'window.SAMPLE_MODELS=' in html
+assert '<mightora-footer' in html
+assert '<div class="footer-bottom">' in html
+assert 'fallback-footer' not in html
+assert 'Semantic Model Mapper by' in html
 assert 'src="https:' not in html, 'offline images should never fetch remotely'
 assert 'logo-light="data:image/' in html
 assert not re.search(r'<(iframe|script|img|link)[^>]+(?:src|href)="https:',html,re.I)
+online=(root/'dist'/'index.html').read_text()
+assert '<mightora-footer yaml-url=' in online
+assert 'https://mightora.io/$2/$3' in online
+assert 'fallback-footer' not in online
 assert (root/'dist'/'index.html').is_file()
 with zipfile.ZipFile(root/'dist'/'downloads'/'semantic-model-mapper-offline.zip') as z:
     assert {'index.html','LICENSE','README.md'} <= set(z.namelist())

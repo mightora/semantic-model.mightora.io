@@ -51,7 +51,21 @@
   <a href="https://github.com/mightora/semantic-model.mightora.io" target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a>
   <a href="https://semantic-model.mightora.io/" target="_blank" rel="noopener noreferrer">Live deployment ↗</a>
 </div></section>
-  <mightora-footer><div class="fallback-footer"><div><strong>Mightora</strong> · Practical tools for builders</div><div>Semantic Model Mapper · <a href="https://github.com/mightora/semantic-model.mightora.io">Source &amp; licence</a> · <a href="https://mightora.io">mightora.io</a> · <a href="https://techtweedie.github.io">TechTweedie</a></div></div></mightora-footer>
+  <mightora-footer yaml-url="https://cdn.jsdelivr.net/gh/mightora/shared-ui@main/footer.yaml">
+    <div class="container">
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          &copy; <span class="footer-year">2026</span> Semantic Model Mapper by
+          <a href="https://mightora.io" target="_blank" rel="noopener noreferrer">Mightora</a>.
+          Free and <a href="https://github.com/mightora/semantic-model.mightora.io/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT licensed</a>.
+        </div>
+        <div class="footer-bottom-links">
+          <a href="https://github.com/mightora/semantic-model.mightora.io" target="_blank" rel="noopener noreferrer">Source code ↗</a>
+          <a href="https://mightora.io" target="_blank" rel="noopener noreferrer">Mightora.io ↗</a>
+        </div>
+      </div>
+    </div>
+  </mightora-footer>
   <!-- ONLINE_FOOTER_PATCH_START -->
   <script>
     // Workaround for malformed indentation in Mightora's public footer.yaml feed.
@@ -64,7 +78,12 @@
           try {
             const response = await originalFetch.apply(this, args);
             const source = await response.text();
-            const corrected = source.replace('    - title: "Mightora"', '  - title: "Mightora"');
+            // Resolve the shared footer's root-relative site links against mightora.io,
+            // not this tool's semantic-model.mightora.io subdomain.
+            const corrected = source
+              .replace('    - title: "Mightora"', '  - title: "Mightora"')
+              .replace(/(\burl:\s*")\/(about|contact|privacy-policy|cookie-policy|terms)\/("\s*$)/gm,
+                '$1https://mightora.io/$2/$3');
             return new Response(corrected, {status:response.status,statusText:response.statusText,headers:response.headers});
           } catch (error) { console.warn('Footer feed correction unavailable.', error); }
         }

@@ -34,6 +34,8 @@ def compile():
     logo,official=official_logo()
     offline=re.sub(r'\s*<!-- ONLINE_SHARED_START -->.*?<!-- ONLINE_SHARED_END -->','',base,flags=re.S)
     offline=re.sub(r'\s*<!-- ONLINE_SHARED_SCRIPTS_START -->.*?<!-- ONLINE_SHARED_SCRIPTS_END -->','',offline,flags=re.S)
+    # The footer web component is not registered in the standalone offline edition.
+    offline=offline.replace(' yaml-url="https://cdn.jsdelivr.net/gh/mightora/shared-ui@main/footer.yaml"','')
     offline=re.sub(r'\s*<!-- ONLINE_FOOTER_PATCH_START -->.*?<!-- ONLINE_FOOTER_PATCH_END -->','',offline,flags=re.S)
     offline=offline.replace('<link rel="stylesheet" href="src/styles.css">','<style>\n'+(ROOT/'src'/'styles.css').read_text().replace('</style>','<\\/style>')+'\n</style>')
     offline=offline.replace('<script src="src/core.js"></script>','<script>\n'+(ROOT/'src'/'core.js').read_text().replace('</script>','<\\/script>')+'\n</script>')
