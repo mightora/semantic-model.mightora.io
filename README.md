@@ -68,3 +68,13 @@ local privacy, about or terms pages. Review the snapshot if the upstream footer 
 The diagram uses clearly labelled fact and lookup tables, explicit **Single →** and **Both ↔** relationship direction labels, **1 / \*** cardinality markers, solid active and dashed inactive relationships, and a keyboard-operable **Links** list. It does not rely on colour alone to convey these meanings. Use the **High contrast** toggle for stronger monochrome relationship and table outlines; the preference stays in local browser storage (where available). High contrast is enabled automatically when the system requests increased contrast. Text, buttons and interactive states use darker high-contrast colours and larger default sizes. Reduced-motion preferences are respected. The exported SVG preserves these diagram labels and relationship patterns.
 
 Contrast ratios were checked for selected foreground/background combinations, with the smallest of the tested text ratios exceeding 7:1. This is **not** a claim of full WCAG conformance or a substitute for assistive-technology testing.
+
+## Automated accessibility checks
+
+The [Accessibility (axe-core)](https://github.com/mightora/semantic-model.mightora.io/actions/workflows/accessibility.yml) workflow runs on pull requests and pushes to main and uses Chromium + axe-core to scan the standalone offline HTML at desktop, mobile, high-contrast, relationship-list and visual-lineage states. The checks cover automatable WCAG 2.0/2.1/2.2 Level A/AA tagged rules. Any violation fails the workflow and a JSON and Markdown report is available in the GitHub Actions artifact (retained 30 days).
+
+[![Automated accessibility checks](https://github.com/mightora/semantic-model.mightora.io/actions/workflows/accessibility.yml/badge.svg?branch=main)](https://github.com/mightora/semantic-model.mightora.io/actions/workflows/accessibility.yml)
+
+**A passing badge is not a WCAG certification.** The online shared components, keyboard and screen-reader workflows, comprehension of diagrams and colour-vision usability also require human checks.
+
+To run locally, build with Python, install playwright==1.56.0 and axe-playwright-python==0.1.8, install Chromium with Playwright and execute tests/accessibility_audit.py.
