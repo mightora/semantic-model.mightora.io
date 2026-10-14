@@ -71,3 +71,8 @@ a{color:#075950;text-decoration-thickness:1.5px;text-underline-offset:2px}
 @media(prefers-contrast:more){.diagram-canvas{background-color:white}.diagram-toolbar{border-bottom:2px solid #111827}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 @media(max-width:780px){.diagram-toolbar{flex-wrap:wrap;height:auto}.toolbar-right{flex-wrap:wrap}.diagram-bottom{font-size:12px}.tabs button{padding:10px 4px}.contrast-toggle{font-size:12px!important}}
+
+/* WCAG A/AA fixes found by the automated axe-core accessibility workflow. */
+.section-overline{color:#075950}
+.mini-pill{color:#075950;background:#ebf7f7}
+.mode-switch button{color:#344b5a}

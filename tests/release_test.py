@@ -10,6 +10,8 @@ assert '<link rel="stylesheet" href=' not in html
 assert 'MapperCore' in html
 assert 'window.SAMPLE_MODELS=' in html
 assert '<mightora-footer' in html
+assert 'role="group" aria-label="Relationship diagram' in html
+assert 'id="inspector" class="inspector-content" tabindex="0" role="region"' in html
 assert '<div class="footer-bottom">' in html
 assert 'class="footer-fallback"' in html
 assert 'aria-label="Mightora website links"' in html
