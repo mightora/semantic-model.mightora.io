@@ -70,6 +70,10 @@ def compile():
         # Developer builds lack CI's downloaded official PNG; keep fallback visible as text.
         offline=re.sub(r'<img src="'+re.escape(logo)+r'" alt="mightora.io"[^>]*>',
                        '<span class="offline-brand-wordmark">Mightora.io</span>',offline)
+    # Offline author photos are intentionally text fallbacks: no CDN image requests.
+    offline=re.sub(r'<img\s+src="https://cdn\.jsdelivr\.net/gh/mightora/shared-ui@main/ian-tweedie-sq2\.png"[^>]*>', '', offline)
+    offline=offline.replace('class="author-avatar-fallback"','class="author-avatar-fallback offline-show"')
+    offline=offline.replace('class="author-blog-fallback"','class="author-blog-fallback offline-show"')
     # Only Mightora's main logo is bundled. Use branded text for the other cards offline,
     # avoiding remote image requests while retaining all brand and navigation links.
     offline=re.sub(r'<img\s+src="https://raw\.githubusercontent\.com/mightora/mightora\.io/main/static/images/(TechTweedie_bw|tweedTechnologyLogoLight)\.png"[^>]*>',

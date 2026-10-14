@@ -1,1 +1,16 @@
-{"name":"@mightora/semantic-model-mapper","version":"1.0.0","private":true,"description":"Local-first Power BI and Microsoft Fabric semantic model explorer","license":"MIT","scripts":{"build":"python3 scripts/build.py","test":"node --test tests/*.test.cjs && python3 tests/release_test.py","test:unit":"node --test tests/*.test.cjs","audit":"npm audit --audit-level=high"},"engines":{"node":">=20"}}
+{
+  "name": "@mightora/semantic-model-mapper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local-first Power BI and Microsoft Fabric semantic model explorer",
+  "license": "MIT",
+  "scripts": {
+    "build": "python3 scripts/build.py",
+    "test": "node --test tests/*.test.cjs && python3 tests/release_test.py && python3 tests/trust_badges_test.py",
+    "test:unit": "node --test tests/*.test.cjs",
+    "audit": "npm audit --audit-level=high"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

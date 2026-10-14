@@ -80,3 +80,10 @@ The [Accessibility (axe-core)](https://github.com/mightora/semantic-model.mighto
 **A passing badge is not a WCAG certification.** The online shared components, keyboard and screen-reader workflows, comprehension of diagrams and colour-vision usability also require human checks.
 
 To run locally, build with Python, install playwright==1.56.0 and axe-playwright-python==0.1.8, install Chromium with Playwright and execute tests/accessibility_audit.py.
+
+
+## Author section and evidence badges
+
+The author biography uses the shared Mightora author web component with a static inline profile, full-width dark overlay, larger portrait, legible text and keyboard-focusable links. The component receives an empty inline JSON configuration so it does not replace the authored biography or fetch a missing remote file. Online portrait and blog-logo URLs point to existing public project assets. The standalone edition uses an accessible initials and brand-text fallback, without network requests.
+
+The badges are dynamically derived, not manually marked green: the GitHub Actions workflow endpoints represent the `main` branch's build/deployment, CodeQL and accessibility runs. Shields.io reports the GitHub repository licence. Every badge links to its underlying repository evidence; source and workflow history are plain navigation links. The badge integration is checked by `tests/trust_badges_test.py`. A passing automated scan does not certify security or WCAG conformance.

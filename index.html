@@ -43,15 +43,42 @@
     <section id="privacy" class="info-section privacy-section outer"><div class="section-overline">BUILT TO BE INSPECTED</div><h2>Local processing. Visible network activity.</h2><div class="privacy-grid"><div><p>The mapper parses selected files, calculates diagram positions and generates exports locally. It does not transmit model files, DAX expressions or report metadata to a server. The online edition loads Mightora's shared UI, logo and footer dependencies from public hosts. The offline edition bundles scripts and styles without any runtime CDN, API or telemetry.</p><h3>Verify it yourself</h3><p>Open browser Developer Tools with <kbd>F12</kbd>, select <strong>Network</strong>, enable <strong>Preserve log</strong>, reload, and inspect requests and remote domains. The list below is based on the Resource Timing API; it can omit some requests and is <strong>not</strong> a replacement for Developer Tools or a security audit.</p></div><div class="network-card"><div class="network-card-title"><span class="pulse"></span> Browser request transparency</div><div class="network-number" id="resourceCount">—</div><p>Observed loaded resources</p><div id="networkDomains" class="network-domains">Inspecting resources…</div><button type="button" id="refreshNetwork" class="text-btn">↻ Refresh resource summary</button></div></div><div class="offline-actions"><div><strong>Prefer no network at all?</strong><p>Download the self-contained offline edition to run on your desktop, with no web server required.</p></div><a class="primary-btn" id="downloadOffline" href="downloads/semantic-model-mapper-offline.html" download>↓ Download offline HTML</a><a class="secondary-btn" id="downloadZip" href="downloads/semantic-model-mapper-offline.zip" download>↓ Download offline ZIP</a></div></section>
     <section id="questions" class="info-section outer faq"><div class="section-overline">COMMON QUESTIONS</div><h2>Frequently asked questions</h2><details><summary>Can I open a Power BI PBIX file?</summary><p>Not directly. Export a Power BI Project (PBIP) to get text-based TMDL semantic-model and PBIR report metadata; then import those files or the project folder.</p></details><details><summary>Does the application connect to a Power BI workspace?</summary><p>No. This edition reads locally selected model definitions and does not require Microsoft authentication or workspace permissions.</p></details><details><summary>Does the model mapper resolve every DAX dependency?</summary><p>No. It shows direct table and column relationships plus references found in supported PBIR visual metadata. Complex DAX measure chains, calculation groups, field parameters and hidden runtime behaviour need specialist lineage analysis.</p></details><details><summary>Can I edit the diagram after export?</summary><p>Yes. SVG is a vector format, Mermaid is text-based diagram source, and JSON can be imported back into this mapper.</p></details></section>
   </main>
-  <section class="author-area outer"><mightora-author><div class="author-section-overlay"><div class="author-section-inner"><div class="author-photos"><img src="https://techtweedie.github.io/images/author/ian-tweedie-sq2_hu_a380911c6f4726de.png" alt="Ian Tweedie" class="author-avatar" loading="lazy"><img src="https://raw.githubusercontent.com/TechTweedie/techtweedie.github.io/v2/assets/images/site/main-logo.png" alt="TechTweedie" class="author-blog-logo" loading="lazy"></div><div class="author-text"><h2 class="author-heading">Built by TechTweedie</h2><p class="author-bio">Semantic Model Mapper is a free tool created by <strong>Ian Tweedie</strong>, also known as <strong>TechTweedie</strong>. Based in North East England, Ian develops practical tools for architects, developers and data professionals.</p><div class="author-links"><a href="https://techtweedie.github.io" target="_blank" rel="noopener" class="author-link">Blog ↗</a><a href="https://github.com/itweedie" target="_blank" rel="noopener" class="author-link">GitHub ↗</a></div></div></div></div></mightora-author></section>
-  <section class="trust-strip outer" aria-label="Open source and quality evidence"><h2>Open source. Independently inspectable.</h2><p>MIT-licensed source and automated checks are included in the repository package. All code is public under the MIT licence. Build, security-analysis, accessibility-check and deployment badges link to their actual GitHub Actions workflows; inspect the results independently. Passing automated checks does not certify WCAG conformance.</p><div class="trust-links" id="trustLinks">
-  <a href="https://github.com/mightora/semantic-model.mightora.io/actions/workflows/pages.yml" target="_blank" rel="noopener noreferrer" aria-label="Build, tests and GitHub Pages deployment status"><img alt="Build, tests and deployment status" loading="lazy" src="https://github.com/mightora/semantic-model.mightora.io/actions/workflows/pages.yml/badge.svg"></a>
-  <a href="https://github.com/mightora/semantic-model.mightora.io/actions/workflows/accessibility.yml" target="_blank" rel="noopener noreferrer" aria-label="Automated accessibility test status"><img alt="Accessibility test workflow status" loading="lazy" src="https://github.com/mightora/semantic-model.mightora.io/actions/workflows/accessibility.yml/badge.svg?branch=main"></a>
-  <a href="https://github.com/mightora/semantic-model.mightora.io/actions/workflows/codeql.yml" target="_blank" rel="noopener noreferrer" aria-label="CodeQL security analysis status"><img alt="CodeQL analysis status" loading="lazy" src="https://github.com/mightora/semantic-model.mightora.io/actions/workflows/codeql.yml/badge.svg"></a>
-  <a href="https://github.com/mightora/semantic-model.mightora.io/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT licence ↗</a>
-  <a href="https://github.com/mightora/semantic-model.mightora.io" target="_blank" rel="noopener noreferrer">Source on GitHub ↗</a>
-  <a href="https://semantic-model.mightora.io/" target="_blank" rel="noopener noreferrer">Live deployment ↗</a>
-</div></section>
+  <section class="author-area" aria-label="About the creator">
+    <mightora-author config-url="data:application/json,%7B%7D">
+      <div class="author-section-overlay">
+        <div class="author-section-inner">
+          <div class="author-photos">
+            <img src="https://cdn.jsdelivr.net/gh/mightora/shared-ui@main/ian-tweedie-sq2.png" alt="Portrait of Ian Tweedie" class="author-avatar" loading="lazy" width="120" height="120" onerror="this.hidden=true">
+            <span class="author-avatar-fallback" aria-hidden="true">IT</span>
+            <img src="https://raw.githubusercontent.com/TechTweedie/techtweedie.github.io/v2/assets/images/site/main-logo.png" alt="TechTweedie blog logo" class="author-blog-logo" loading="lazy" onerror="this.hidden=true">
+            <span class="author-blog-fallback" aria-hidden="true">TechTweedie</span>
+          </div>
+          <div class="author-text">
+            <h2 class="author-heading">Built by TechTweedie</h2>
+            <p class="author-bio">Semantic Model Mapper is a free, open-source Mightora tool created by <strong>Ian Tweedie (TechTweedie)</strong>, a technology consultant and developer based in North East England. Ian creates practical tools and resources for the Power Platform, data and development communities.</p>
+            <div class="author-links">
+              <a href="https://techtweedie.github.io" target="_blank" rel="noopener noreferrer" class="author-link">Read the TechTweedie blog ↗</a>
+              <a href="https://github.com/itweedie" target="_blank" rel="noopener noreferrer" class="author-link">GitHub profile ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mightora-author>
+  </section>
+  <section class="trust-strip outer" aria-label="Open-source and verification evidence">
+    <h2>Open source. Independently verifiable.</h2>
+    <p>The status images below are supplied by GitHub Actions and Shields.io from this public repository, not manually assigned ratings. A successful scan does not certify security or WCAG conformance.</p>
+    <div class="trust-links" id="trustLinks">
+      <a href="https://github.com/mightora/semantic-model.mightora.io/actions/workflows/pages.yml" target="_blank" rel="noopener noreferrer" aria-label="Build, automated tests and deployment workflow results"><img alt="Build, tests and deployment workflow status" loading="lazy" src="https://github.com/mightora/semantic-model.mightora.io/actions/workflows/pages.yml/badge.svg?branch=main"></a>
+      <a href="https://github.com/mightora/semantic-model.mightora.io/actions/workflows/accessibility.yml" target="_blank" rel="noopener noreferrer" aria-label="Automated accessibility workflow results and downloadable report"><img alt="Automated accessibility check workflow status" loading="lazy" src="https://github.com/mightora/semantic-model.mightora.io/actions/workflows/accessibility.yml/badge.svg?branch=main"></a>
+      <a href="https://github.com/mightora/semantic-model.mightora.io/actions/workflows/codeql.yml" target="_blank" rel="noopener noreferrer" aria-label="CodeQL security analysis workflow results"><img alt="CodeQL security analysis workflow status" loading="lazy" src="https://github.com/mightora/semantic-model.mightora.io/actions/workflows/codeql.yml/badge.svg?branch=main"></a>
+      <a href="https://github.com/mightora/semantic-model.mightora.io/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" aria-label="Read the repository's open-source licence"><img alt="Repository licence reported by GitHub" loading="lazy" src="https://img.shields.io/github/license/mightora/semantic-model.mightora.io?label=licence"></a>
+    </div>
+    <nav class="trust-resource-links" aria-label="Repository evidence">
+      <a href="https://github.com/mightora/semantic-model.mightora.io" target="_blank" rel="noopener noreferrer">Inspect source code ↗</a>
+      <a href="https://github.com/mightora/semantic-model.mightora.io/actions" target="_blank" rel="noopener noreferrer">View workflow history ↗</a>
+    </nav>
+  </section>
   <mightora-footer yaml-url="https://cdn.jsdelivr.net/gh/mightora/shared-ui@main/footer.yaml">
     <!-- FOOTER_FALLBACK: generated from assets/footer-fallback.json; visible if shared-ui cannot load -->
     <div class="container">

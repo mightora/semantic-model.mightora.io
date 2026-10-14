@@ -20,11 +20,17 @@ assert html.count('class="footer-col"')==3
 assert 'https://mightora.io/privacy-policy/' in html
 assert 'fallback-footer' not in html
 assert 'Semantic Model Mapper by' in html
+assert 'class="author-avatar-fallback offline-show"' in html
+assert 'class="author-blog-fallback offline-show"' in html
+assert 'ian-tweedie-sq2.png' not in html
+assert 'class="author-area"' in html
 assert 'src="https:' not in html, 'offline images should never fetch remotely'
 assert 'logo-light="data:image/' in html
 assert not re.search(r'<(iframe|script|img|link)[^>]+(?:src|href)="https:',html,re.I)
 online=(root/'dist'/'index.html').read_text()
 assert '<mightora-footer yaml-url=' in online
+assert 'Open source. Independently verifiable.' in online
+assert 'Built by TechTweedie' in online
 assert 'class="footer-fallback"' in online
 assert online.count('class="footer-col"')==3
 assert online.count('class="footer-brand"')==3
