@@ -126,4 +126,15 @@
   <script src="https://cdn.jsdelivr.net/gh/mightora/shared-ui@main/components.js" defer></script>
   <!-- ONLINE_SHARED_SCRIPTS_END -->
   <script src="src/core.js"></script><script src="src/app.js"></script>
+
+<!-- Cloudflare Web Analytics: production only; no network traffic when opened locally/offline -->
+<script>
+  if (window.location.hostname === 'semantic-model.mightora.io') {
+    const analyticsBeacon = document.createElement('script');
+    analyticsBeacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    analyticsBeacon.defer = true;
+    analyticsBeacon.setAttribute('data-cf-beacon', '{"token":"54355574b7594d3d9d9946038d33925a","spa":true}');
+    document.head.appendChild(analyticsBeacon);
+  }
+</script>
 </body></html>
