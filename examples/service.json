@@ -1,0 +1,14 @@
+{
+ "name":"Service Desk Performance","tables":[
+ {"name":"FactTickets","description":"Support ticket activity","columns":[{"name":"TicketID","type":"int64"},{"name":"CreatedDateKey","type":"int64"},{"name":"AssignedAgentKey","type":"int64"},{"name":"PriorityKey","type":"int64"},{"name":"ResolutionHours","type":"double"},{"name":"SLAHit","type":"boolean"}],"measures":[{"name":"Ticket Count","expression":"COUNTROWS(FactTickets)"},{"name":"Average Resolution","expression":"AVERAGE(FactTickets[ResolutionHours])"},{"name":"SLA Compliance","expression":"DIVIDE(CALCULATE([Ticket Count], FactTickets[SLAHit]=TRUE()), [Ticket Count])"}]},
+ {"name":"DimAgent","columns":[{"name":"AgentKey","type":"int64"},{"name":"AgentName","type":"string"},{"name":"TeamKey","type":"int64"}],"measures":[]},
+ {"name":"DimTeam","columns":[{"name":"TeamKey","type":"int64"},{"name":"TeamName","type":"string"}],"measures":[]},
+ {"name":"DimPriority","columns":[{"name":"PriorityKey","type":"int64"},{"name":"PriorityName","type":"string"}],"measures":[]},
+ {"name":"DimDate","columns":[{"name":"DateKey","type":"int64"},{"name":"Date","type":"dateTime"},{"name":"Week","type":"string"}],"measures":[]}],
+ "relationships":[
+ {"fromTable":"FactTickets","fromColumn":"AssignedAgentKey","toTable":"DimAgent","toColumn":"AgentKey","cardinality":"many-to-one","filterDirection":"single","active":true},
+ {"fromTable":"FactTickets","fromColumn":"PriorityKey","toTable":"DimPriority","toColumn":"PriorityKey","cardinality":"many-to-one","filterDirection":"single","active":true},
+ {"fromTable":"FactTickets","fromColumn":"CreatedDateKey","toTable":"DimDate","toColumn":"DateKey","cardinality":"many-to-one","filterDirection":"single","active":true},
+ {"fromTable":"DimAgent","fromColumn":"TeamKey","toTable":"DimTeam","toColumn":"TeamKey","cardinality":"many-to-one","filterDirection":"single","active":true}],
+ "visuals":[{"id":"sla","name":"SLA Compliance KPI","page":"Service Overview","type":"card","fields":["FactTickets.SLA Compliance"]},{"id":"by-agent","name":"Tickets by Agent","page":"Agent Performance","type":"barChart","fields":["DimAgent.AgentName","FactTickets.Ticket Count"]},{"id":"priority","name":"Priority Mix","page":"Service Overview","type":"donutChart","fields":["DimPriority.PriorityName","FactTickets.Ticket Count"]}]
+}

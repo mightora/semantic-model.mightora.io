@@ -1,0 +1,24 @@
+{
+  "name":"Northwind Retail Analytics",
+  "tables":[
+    {"name":"FactSales","description":"Transactional sales line facts","columns":[{"name":"SalesKey","type":"int64"},{"name":"DateKey","type":"int64"},{"name":"ProductKey","type":"int64"},{"name":"CustomerKey","type":"int64"},{"name":"Quantity","type":"int64"},{"name":"UnitPrice","type":"decimal"},{"name":"Amount","type":"decimal"}],"measures":[{"name":"Total Sales","expression":"SUM(FactSales[Amount])"},{"name":"Units Sold","expression":"SUM(FactSales[Quantity])"},{"name":"Average Order Value","expression":"DIVIDE([Total Sales], DISTINCTCOUNT(FactSales[SalesKey]))"}]},
+    {"name":"DimProduct","description":"Product catalogue and categories","columns":[{"name":"ProductKey","type":"int64"},{"name":"ProductName","type":"string"},{"name":"Category","type":"string"},{"name":"Brand","type":"string"}],"measures":[]},
+    {"name":"DimCustomer","description":"Customer master details","columns":[{"name":"CustomerKey","type":"int64"},{"name":"CustomerName","type":"string"},{"name":"Segment","type":"string"},{"name":"RegionKey","type":"int64"}],"measures":[]},
+    {"name":"DimDate","description":"Reporting calendar","columns":[{"name":"DateKey","type":"int64"},{"name":"FullDate","type":"dateTime"},{"name":"Month","type":"string"},{"name":"Year","type":"int64"}],"measures":[{"name":"YTD Sales","expression":"TOTALYTD([Total Sales], DimDate[FullDate])"}]},
+    {"name":"DimRegion","description":"Territory mapping","columns":[{"name":"RegionKey","type":"int64"},{"name":"Country","type":"string"},{"name":"RegionName","type":"string"}],"measures":[]},
+    {"name":"FactTargets","description":"Sales targets by month","columns":[{"name":"TargetKey","type":"int64"},{"name":"DateKey","type":"int64"},{"name":"RegionKey","type":"int64"},{"name":"TargetAmount","type":"decimal"}],"measures":[{"name":"Total Target","expression":"SUM(FactTargets[TargetAmount])"}]}],
+  "relationships":[
+    {"name":"Sales Product","fromTable":"FactSales","fromColumn":"ProductKey","toTable":"DimProduct","toColumn":"ProductKey","cardinality":"many-to-one","filterDirection":"single","active":true},
+    {"name":"Sales Customer","fromTable":"FactSales","fromColumn":"CustomerKey","toTable":"DimCustomer","toColumn":"CustomerKey","cardinality":"many-to-one","filterDirection":"single","active":true},
+    {"name":"Sales Date","fromTable":"FactSales","fromColumn":"DateKey","toTable":"DimDate","toColumn":"DateKey","cardinality":"many-to-one","filterDirection":"single","active":true},
+    {"name":"Customer Region","fromTable":"DimCustomer","fromColumn":"RegionKey","toTable":"DimRegion","toColumn":"RegionKey","cardinality":"many-to-one","filterDirection":"both","active":true},
+    {"name":"Targets Date","fromTable":"FactTargets","fromColumn":"DateKey","toTable":"DimDate","toColumn":"DateKey","cardinality":"many-to-one","filterDirection":"single","active":true},
+    {"name":"Targets Region","fromTable":"FactTargets","fromColumn":"RegionKey","toTable":"DimRegion","toColumn":"RegionKey","cardinality":"many-to-one","filterDirection":"single","active":false}
+  ],
+  "visuals":[
+    {"id":"sales-card","name":"Total Sales KPI","page":"Overview","type":"card","fields":["FactSales.Total Sales"]},
+    {"id":"sales-trend","name":"Monthly Sales Trend","page":"Overview","type":"lineChart","fields":["DimDate.Month","FactSales.Total Sales","DimDate.Year"]},
+    {"id":"category","name":"Sales by Product Category","page":"Performance","type":"barChart","fields":["DimProduct.Category","FactSales.Total Sales"]},
+    {"id":"region-target","name":"Target vs Actual","page":"Performance","type":"clusteredColumnChart","fields":["DimRegion.RegionName","FactTargets.Total Target","FactSales.Total Sales"]}
+  ]
+}
