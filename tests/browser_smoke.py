@@ -12,6 +12,17 @@ with sync_playwright() as p:
     desktop.set_content(html)
     assert desktop.locator('#tableCount').inner_text()=='6'
     assert desktop.locator('#diagramSvg g[data-table]').count()==6
+    assert desktop.locator('#diagramSvg .relation-target').count()==6
+    desktop.locator('#tabRelationships').click()
+    assert desktop.locator('#relationList button').count()==6
+    desktop.locator('#relationList button').first.click()
+    assert 'RELATIONSHIP' in desktop.locator('#inspector .inspect-tag').inner_text()
+    desktop.locator('#highContrastToggle').click()
+    assert desktop.locator('#highContrastToggle').get_attribute('aria-pressed')=='true'
+    assert desktop.locator('html').get_attribute('data-contrast')=='high'
+    assert desktop.locator('#diagramSvg text').filter(has_text='Single').count()>0
+    desktop.locator('#highContrastToggle').click()
+    assert desktop.locator('#highContrastToggle').get_attribute('aria-pressed')=='false'
     desktop.locator('#tabVisuals').click()
     desktop.locator('#visualList button').nth(2).click()
     assert desktop.locator('#inspector .inspect-name').inner_text()=='Sales by Product Category'
@@ -44,6 +55,8 @@ with sync_playwright() as p:
     mobile_errors=[];mobile.on('pageerror',lambda e:mobile_errors.append(str(e)))
     mobile.set_content(html)
     assert mobile.locator('#tableCount').inner_text()=='6'
+    assert mobile.locator('#tabRelationships').count()==1
+    assert mobile.locator('#highContrastToggle').count()==1
     assert mobile.evaluate('document.documentElement.scrollWidth-document.documentElement.clientWidth')==0
     assert mobile.locator('mightora-footer .footer-fallback').is_visible()
     assert mobile.locator('mightora-footer .footer-col').count()==3

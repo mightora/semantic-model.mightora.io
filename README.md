@@ -62,3 +62,9 @@ It remains visible if the shared CDN, JavaScript or footer YAML fails. Modern br
 the shared component successfully inserts navigation columns **and** brand cards, avoiding duplicate
 links. The fallback uses absolute Mightora links so subdomains never redirect to non-existent
 local privacy, about or terms pages. Review the snapshot if the upstream footer navigation changes.
+
+## Accessibility and colour-blind-friendly diagrams
+
+The diagram uses clearly labelled fact and lookup tables, explicit **Single →** and **Both ↔** relationship direction labels, **1 / \*** cardinality markers, solid active and dashed inactive relationships, and a keyboard-operable **Links** list. It does not rely on colour alone to convey these meanings. Use the **High contrast** toggle for stronger monochrome relationship and table outlines; the preference stays in local browser storage (where available). High contrast is enabled automatically when the system requests increased contrast. Text, buttons and interactive states use darker high-contrast colours and larger default sizes. Reduced-motion preferences are respected. The exported SVG preserves these diagram labels and relationship patterns.
+
+Contrast ratios were checked for selected foreground/background combinations, with the smallest of the tested text ratios exceeding 7:1. This is **not** a claim of full WCAG conformance or a substitute for assistive-technology testing.
