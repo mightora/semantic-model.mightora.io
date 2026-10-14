@@ -31,13 +31,15 @@ jobs:
           file assets/mightora-logo.png | grep -q 'PNG image data'
       - name: Install browser test tools
         run: |
-          python3 -m pip install playwright==1.56.0
+          python3 -m pip install playwright==1.56.0 axe-playwright-python==0.1.8
           python3 -m playwright install --with-deps chromium
       - run: npm ci
       - run: npm audit --audit-level=high
       - run: npm run build
       - run: npm test
       - run: python3 tests/browser_smoke.py
+      - name: Gate deployment on automated accessibility checks
+        run: python3 tests/accessibility_audit.py
       - name: Require official logo in release
         run: python3 -c 'import json; assert json.load(open("dist/build-manifest.json"))["official_logo_embedded"]'
       - uses: actions/upload-pages-artifact@v3

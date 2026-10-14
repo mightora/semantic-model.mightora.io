@@ -71,6 +71,8 @@ Contrast ratios were checked for selected foreground/background combinations, wi
 
 ## Automated accessibility checks
 
+In addition to its separately badged report workflow, the Pages build runs the same accessibility audit. Failed checks prevent deployment of the changed site.
+
 The [Accessibility (axe-core)](https://github.com/mightora/semantic-model.mightora.io/actions/workflows/accessibility.yml) workflow runs on pull requests and pushes to main and uses Chromium + axe-core to scan the standalone offline HTML at desktop, mobile, high-contrast, relationship-list and visual-lineage states. The checks cover automatable WCAG 2.0/2.1/2.2 Level A/AA tagged rules. Any violation fails the workflow and a JSON and Markdown report is available in the GitHub Actions artifact (retained 30 days).
 
 [![Automated accessibility checks](https://github.com/mightora/semantic-model.mightora.io/actions/workflows/accessibility.yml/badge.svg?branch=main)](https://github.com/mightora/semantic-model.mightora.io/actions/workflows/accessibility.yml)
