@@ -28,12 +28,25 @@ with sync_playwright() as p:
     assert desktop.locator('#tableCount').inner_text()=='1'
     assert desktop.locator('#datasetPill').inner_text()=='Local file'
     assert not errors,errors
+    # The standalone edition retains the full footer even without the shared CDN.
+    assert desktop.locator('mightora-footer .footer-fallback').is_visible()
+    assert desktop.locator('mightora-footer .footer-col').count()==3
+    assert desktop.locator('mightora-footer .footer-brand').count()==3
+    # Simulate what shared-ui does after its YAML fetch: prepend generated columns
+    # and brand strip before the original fallback and copyright bar.
+    desktop.evaluate("""() => {const e=document.querySelector('mightora-footer');
+      const original=e.innerHTML;e.innerHTML='<div class="container"><div class="footer-main"><div class="footer-col">Shared navigation</div></div></div><div class="container"><div class="footer-brands"><a class="footer-brand">Shared brands</a></div></div>'+original;
+    }""")
+    assert not desktop.locator('mightora-footer .footer-fallback').is_visible()
+    assert desktop.locator('mightora-footer > .container > .footer-main').is_visible()
     assert not requests,requests
     mobile=browser.new_page(viewport={'width':390,'height':844})
     mobile_errors=[];mobile.on('pageerror',lambda e:mobile_errors.append(str(e)))
     mobile.set_content(html)
     assert mobile.locator('#tableCount').inner_text()=='6'
     assert mobile.evaluate('document.documentElement.scrollWidth-document.documentElement.clientWidth')==0
+    assert mobile.locator('mightora-footer .footer-fallback').is_visible()
+    assert mobile.locator('mightora-footer .footer-col').count()==3
     assert not mobile_errors,mobile_errors
     print('PASS: interactive browser smoke, exports, local import, zero network, desktop/mobile')
     browser.close()

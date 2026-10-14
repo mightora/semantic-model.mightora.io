@@ -11,6 +11,11 @@ assert 'MapperCore' in html
 assert 'window.SAMPLE_MODELS=' in html
 assert '<mightora-footer' in html
 assert '<div class="footer-bottom">' in html
+assert 'class="footer-fallback"' in html
+assert 'aria-label="Mightora website links"' in html
+assert html.count('class="footer-brand"')==3
+assert html.count('class="footer-col"')==3
+assert 'https://mightora.io/privacy-policy/' in html
 assert 'fallback-footer' not in html
 assert 'Semantic Model Mapper by' in html
 assert 'src="https:' not in html, 'offline images should never fetch remotely'
@@ -18,6 +23,9 @@ assert 'logo-light="data:image/' in html
 assert not re.search(r'<(iframe|script|img|link)[^>]+(?:src|href)="https:',html,re.I)
 online=(root/'dist'/'index.html').read_text()
 assert '<mightora-footer yaml-url=' in online
+assert 'class="footer-fallback"' in online
+assert online.count('class="footer-col"')==3
+assert online.count('class="footer-brand"')==3
 assert 'https://mightora.io/$2/$3' in online
 assert 'fallback-footer' not in online
 assert (root/'dist'/'index.html').is_file()

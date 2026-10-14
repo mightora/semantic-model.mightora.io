@@ -52,3 +52,13 @@ Set GitHub Pages to **GitHub Actions** in repository Settings → Pages. Push so
 ## Licence
 
 MIT, see [LICENSE](LICENSE). Built under Mightora's shared branding and static web development standards.
+
+### Shared Mightora footer resilience
+
+The online edition loads the canonical `mightora/shared-ui` footer component and its shared YAML feed.
+`assets/footer-fallback.json` is a deliberately static, inspectable snapshot of the same navigation
+and brand links, rendered by `scripts/build.py` for both GitHub Pages and the standalone edition.
+It remains visible if the shared CDN, JavaScript or footer YAML fails. Modern browsers hide it when
+the shared component successfully inserts navigation columns **and** brand cards, avoiding duplicate
+links. The fallback uses absolute Mightora links so subdomains never redirect to non-existent
+local privacy, about or terms pages. Review the snapshot if the upstream footer navigation changes.

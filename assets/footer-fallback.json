@@ -1,0 +1,22 @@
+{
+  "columns": [
+    [
+      {"title":"Site","links":[["About","https://mightora.io/about/"],["Contact","https://mightora.io/contact/"],["Privacy Policy","https://mightora.io/privacy-policy/"],["Cookie Policy","https://mightora.io/cookie-policy/"],["Terms","https://mightora.io/terms/"]]},
+      {"title":"Mightora","links":[["Tools","https://mightora.io/tools/"],["FAQ","https://mightora.io/faq/"]]}
+    ],
+    [
+      {"title":"Mightora Tools","links":[["Pipeline Tools","https://mightora.io/tools/cicd/"],["PCF Controls","https://mightora.io/tools/pcf/"],["Power Automate Connectors","https://mightora.io/tools/power-automate-connectors/"],["Power Automate Templates","https://mightora.io/tools/power-automate-templates/"],["Developer Tools","https://mightora.io/tools/developer/"],["WiFi Captive Portal Helper ↗","http://connect.mightora.io/"]] },
+      {"title":"VS Code Extensions","links":[["Power Platform Documentation ↗","https://marketplace.visualstudio.com/items?itemName=mightoraio.mightora-power-platform-devOps-extension"],["Playwright for Power Platform ↗","https://marketplace.visualstudio.com/items?itemName=mightoraio.mightora-playwright-for-power-platform"],["Upload MD To Wiki ↗","https://marketplace.visualstudio.com/items?itemName=mightoraio.upload-md-to-wiki"],["Commit to Repo ↗","https://marketplace.visualstudio.com/items?itemName=mightoraio.mightora-commit-to-repo-extension"],["Power Platform Solution Modifier ↗","https://marketplace.visualstudio.com/items?itemName=mightoraio.mightora-power-platform-solution-modifier"]]}
+    ],
+    [
+      {"title":"Community","links":[["GitHub ↗","https://github.com/mightora"],["YouTube ↗","https://youtube.com/@techtweedie"],["Medium ↗","https://medium.com/@ian.tweedie"],["LinkedIn ↗","https://go.iantweedie.biz/LinkedIn-Linktree"],["Sessionize ↗","https://sessionize.com/ian-tweedie/"],["Power Platform Clinic ↗","https://powerplatformclinic.github.io"]]},
+      {"title":"Microsoft Learn","links":[["Calculate Working Day Connector ↗","https://learn.microsoft.com/en-us/connectors/calculateworkingday/"],["Email Domain Checker Connector ↗","https://learn.microsoft.com/en-us/connectors/emaildomainchecker/"]] },
+      {"title":"Contact","links":[["Contact ↗","https://iantweedie.biz"],["Status Page ↗","https://stats.uptimerobot.com/3EPW8gBu4N"],["All Links ↗","https://linktr.ee/itweedie"],["Coaching ↗","https://partners.simply.coach/ian-tweedie"]]}
+    ]
+  ],
+  "brands": [
+    {"name":"mightora.io","url":"https://mightora.io","logo":"https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/mightoraIoLogo4-200x900.png","description":"Free tools for the Power Platform community"},
+    {"name":"Tech Tweedie","url":"https://techtweedie.github.io","logo":"https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/TechTweedie_bw.png","description":"Technical blog and tutorials by Ian Tweedie"},
+    {"name":"Tweed.technology","url":"https://tweed.technology","logo":"https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/tweedTechnologyLogoLight.png","description":"Technology consulting by Ian Tweedie"}
+  ]
+}

@@ -16,6 +16,30 @@ def official_logo():
     svg='<svg xmlns="http://www.w3.org/2000/svg" width="900" height="200" viewBox="0 0 900 200"><rect width="900" height="200" fill="#ffffff"/><text x="18" y="139" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="134" fill="#173a4c">MIGHTORA</text></svg>'
     return 'data:image/svg+xml;base64,'+base64.b64encode(svg.encode()).decode(), False
 
+def render_footer_fallback():
+    """Static, inspectable backup matching mightora/shared-ui's footer structure.
+
+    The shared web component still loads the canonical YAML feed when online.
+    Once it renders, CSS hides this fallback so links never appear twice.
+    """
+    data=json.loads((ROOT/'assets'/'footer-fallback.json').read_text())
+    safe=lambda value: html.escape(str(value),quote=True)
+    column_markup=[]
+    for groups in data['columns']:
+        sections=[]
+        for group in groups:
+            links=''.join('<li><a href="'+safe(link)+'">'+safe(label)+'</a></li>' for label,link in group['links'])
+            sections.append('<section class="footer-fallback-section"><h3 class="footer-section-title">'+safe(group['title'])+'</h3><ul class="footer-links">'+links+'</ul></section>')
+        column_markup.append('<div class="footer-col"><div class="footer-col-sections">'+''.join(sections)+'</div></div>')
+    brands=[]
+    for brand in data['brands']:
+        brands.append('<a class="footer-brand" href="'+safe(brand['url'])+'" target="_blank" rel="noopener noreferrer">'
+                      +'<img src="'+safe(brand['logo'])+'" alt="'+safe(brand['name'])+'" loading="lazy" onerror="this.hidden=true">'
+                      +'<span class="footer-brand-desc">'+safe(brand['description'])+'</span></a>')
+    return ('<div class="footer-fallback" aria-label="Mightora footer navigation">'
+            +'<div class="container"><nav class="footer-main" aria-label="Mightora website links">'+''.join(column_markup)+'</nav></div>'
+            +'<div class="container"><div class="footer-brands">'+''.join(brands)+'</div></div></div>')
+
 def compile():
     if DIST.exists():shutil.rmtree(DIST)
     (DIST/'downloads').mkdir(parents=True)
@@ -27,6 +51,7 @@ def compile():
     samples={n:json.loads((ROOT/'examples'/f'{n}.json').read_text()) for n in ('retail','service')}
     sample_js='\n<script>window.SAMPLE_MODELS='+json.dumps(samples,separators=(',',':')).replace('</','<\\/')+';</script>\n'
     base=(ROOT/'index.html').read_text()
+    base=base.replace('<!-- FOOTER_FALLBACK: generated from assets/footer-fallback.json; visible if shared-ui cannot load -->',render_footer_fallback())
     base=base.replace('  <script src="src/core.js"></script>',sample_js+'  <script src="src/core.js"></script>')
     # Exact edition availability is established only once this script creates both downloads.
     online=base.replace('  <script src="src/core.js"></script>','  <script>window.MIGHTORA_DOWNLOADS_AVAILABLE=true;</script>\n  <script src="src/core.js"></script>')
@@ -41,6 +66,14 @@ def compile():
     offline=offline.replace('<script src="src/core.js"></script>','<script>\n'+(ROOT/'src'/'core.js').read_text().replace('</script>','<\\/script>')+'\n</script>')
     offline=offline.replace('<script src="src/app.js"></script>','<script>\n'+(ROOT/'src'/'app.js').read_text().replace('</script>','<\\/script>')+'\n</script>')
     offline=offline.replace('https://raw.githubusercontent.com/mightora/mightora.io/main/static/images/mightoraIoLogo4-200x900.png',logo)
+    if not official:
+        # Developer builds lack CI's downloaded official PNG; keep fallback visible as text.
+        offline=re.sub(r'<img src="'+re.escape(logo)+r'" alt="mightora.io"[^>]*>',
+                       '<span class="offline-brand-wordmark">Mightora.io</span>',offline)
+    # Only Mightora's main logo is bundled. Use branded text for the other cards offline,
+    # avoiding remote image requests while retaining all brand and navigation links.
+    offline=re.sub(r'<img\s+src="https://raw\.githubusercontent\.com/mightora/mightora\.io/main/static/images/(TechTweedie_bw|tweedTechnologyLogoLight)\.png"[^>]*>',
+                   lambda match: '<span class="offline-brand-wordmark">'+('Tech Tweedie' if match.group(1)=='TechTweedie_bw' else 'Tweed.technology')+'</span>',offline)
     # The author biography remains; remote profile images are removed from the offline edition.
     offline=re.sub(r'<img\s+src="https://(?:techtweedie\.github\.io|raw\.githubusercontent\.com/TechTweedie)[^>]*>', '',offline)
     # On offline file:// the fallback header is kept; no remote shared-ui registered elements.
